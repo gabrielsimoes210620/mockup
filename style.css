@@ -1,11 +1,11 @@
-/* Reset básico */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Fundo geral */
+/* Corpo */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -15,7 +15,7 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
-  padding: 20px;
+  padding: 16px;
 }
 
 /* Título */
@@ -25,12 +25,15 @@ h2 {
   font-weight: 600;
 }
 
-/* Input de arquivo */
+/* Input */
 input[type="file"] {
+  width: 100%;
+  max-width: 400px;
+  font-size: 1rem;
   background: white;
   color: #333;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px;
+  border-radius: 10px;
   cursor: pointer;
   margin-bottom: 20px;
 }
@@ -38,7 +41,7 @@ input[type="file"] {
 /* Canvas */
 canvas {
   width: 100%;
-  max-width: 360px;
+  max-width: 420px; /* aumentamos */
   height: auto;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -47,34 +50,49 @@ canvas {
 
 /* Botão */
 button {
+  width: 100%;
+  max-width: 400px;
   margin-top: 20px;
-  padding: 12px 24px;
+  padding: 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #00c9a7;
   color: white;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-/* Hover do botão */
+/* Hover */
 button:hover {
   background: #00a98b;
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
-/* Responsividade */
+/* 📱 MOBILE MELHORADO */
 @media (max-width: 480px) {
+
+  body {
+    justify-content: flex-start; /* evita tudo espremido no meio */
+    padding-top: 30px;
+  }
+
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  input[type="file"] {
+    font-size: 1.1rem;
+    padding: 14px;
   }
 
   canvas {
-    max-width: 90%;
+    max-width: 95%; /* ocupa quase toda tela */
   }
 
   button {
-    width: 100%;
+    font-size: 1.2rem;
+    padding: 18px;
   }
 }
