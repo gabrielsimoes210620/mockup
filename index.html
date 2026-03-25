@@ -35,28 +35,41 @@
         ctx.drawImage(fundo, 0, 0, canvas.width, canvas.height);
 
         // 2️⃣ Máscara circular
-        const x = 290;
-        const y = 600;
-        const radius = 250;
+        const x = 290;     // posição X do círculo
+        const y = 600;     // posição Y do círculo
+        const radius = 250; // raio do círculo
 
         ctx.save();
         ctx.beginPath();
         ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2);
         ctx.clip();
 
-        // 3️⃣ Desenha selfie dentro do círculo
-        ctx.drawImage(img, x, y, radius * 2, radius * 2);
+        // 3️⃣ Desenha selfie proporcional dentro do círculo
+        let sx, sy, sWidth, sHeight;
+
+        if(img.width > img.height) {
+          sWidth = img.height;
+          sHeight = img.height;
+          sx = (img.width - img.height)/2;
+          sy = 0;
+        } else {
+          sWidth = img.width;
+          sHeight = img.width;
+          sx = 0;
+          sy = (img.height - img.width)/2;
+        }
+
+        ctx.drawImage(img, sx, sy, sWidth, sHeight, x, y, radius*2, radius*2);
         ctx.restore();
 
         // 4️⃣ Desenha a moldura por cima
-        moldura.onload = function() {
-          ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
-        }
+        ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
       };
 
       img.src = URL.createObjectURL(file);
     });
 
+    // função para baixar a imagem final
     function baixar() {
       const link = document.createElement("a");
       link.download = "mockup.png";
