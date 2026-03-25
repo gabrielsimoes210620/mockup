@@ -17,12 +17,14 @@
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
 
+    // imagens de fundo e moldura
     const fundo = new Image();
-    fundo.src = "fundo.jpg";
+    fundo.src = "fundo.jpg"; // sua imagem de fundo completa
 
     const moldura = new Image();
-    moldura.src = "moldura.png";
+    moldura.src = "moldura.png"; // seu aro circular transparente
 
+    // garante que a selfie seja desenhada quando enviada
     document.getElementById("upload").addEventListener("change", function(e) {
       const file = e.target.files[0];
       const img = new Image();
@@ -31,31 +33,31 @@
         canvas.width = 1080;
         canvas.height = 1920;
 
-        // fundo
+        // 1️⃣ desenha o fundo
         ctx.drawImage(fundo, 0, 0, canvas.width, canvas.height);
 
-        // círculo
-        const x = 290;
-        const y = 600;
-        const radius = 250;
+        // 2️⃣ máscara circular para selfie
+        const x = 290;     // posição X do círculo
+        const y = 600;     // posição Y do círculo
+        const radius = 250; // raio do círculo
 
         ctx.save();
         ctx.beginPath();
         ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2);
         ctx.clip();
 
+        // 3️⃣ desenha selfie dentro do círculo
         ctx.drawImage(img, x, y, radius * 2, radius * 2);
         ctx.restore();
 
-        // moldura por cima
-        moldura.onload = function() {
-          ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
-        }
+        // 4️⃣ desenha a moldura por cima
+        ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
       };
 
       img.src = URL.createObjectURL(file);
     });
 
+    // função para baixar a imagem final
     function baixar() {
       const link = document.createElement("a");
       link.download = "mockup.png";
