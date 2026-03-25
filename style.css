@@ -13,52 +13,53 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   color: white;
-  padding: 16px;
+  padding: 16px; /* espaçamento lateral */
 }
 
 /* Título */
 h2 {
-  margin-bottom: 20px;
-  font-size: 2rem;
+  margin: 20px 0;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
   font-weight: 600;
+  text-align: center;
 }
 
 /* Input */
 input[type="file"] {
-  width: 100%;
-  max-width: 400px;
-  font-size: 1rem;
+  width: calc(100vw - 32px);
+  max-width: 520px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   background: white;
   color: #333;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 12px;
   cursor: pointer;
   margin-bottom: 20px;
 }
 
 /* Canvas */
 canvas {
-  width: 100%;
-  max-width: 420px; /* aumentamos */
+  width: calc(100vw - 32px); /* quase tela toda */
+  max-width: 520px;
   height: auto;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
   background: #000;
 }
 
 /* Botão */
 button {
-  width: 100%;
-  max-width: 400px;
+  width: calc(100vw - 32px);
+  max-width: 520px;
   margin-top: 20px;
-  padding: 16px;
+  padding: 18px;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   background: #00c9a7;
   color: white;
-  font-size: 1.1rem;
+  font-size: clamp(1.1rem, 2.8vw, 1.3rem);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -70,29 +71,13 @@ button:hover {
   transform: scale(1.03);
 }
 
-/* 📱 MOBILE MELHORADO */
-@media (max-width: 480px) {
-
-  body {
-    justify-content: flex-start; /* evita tudo espremido no meio */
-    padding-top: 30px;
-  }
-
+/* Mobile extra pequeno */
+@media (max-width: 360px) {
   h2 {
-    font-size: 1.6rem;
-  }
-
-  input[type="file"] {
-    font-size: 1.1rem;
-    padding: 14px;
-  }
-
-  canvas {
-    max-width: 95%; /* ocupa quase toda tela */
+    font-size: 1.4rem;
   }
 
   button {
-    font-size: 1.2rem;
-    padding: 18px;
+    padding: 16px;
   }
 }
