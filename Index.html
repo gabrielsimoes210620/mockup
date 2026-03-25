@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Moldura</title>
+</head>
+<body style="text-align:center; font-family:sans-serif;">
+
+  <h2>Envie sua foto</h2>
+  <input type="file" id="upload"><br><br>
+
+  <canvas id="canvas"></canvas><br><br>
+
+  <button onclick="baixar()">Baixar imagem</button>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const fundo = new Image();
+    fundo.src = "fundo.jpg";
+
+    const moldura = new Image();
+    moldura.src = "moldura.png";
+
+    document.getElementById("upload").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      const img = new Image();
+
+      img.onload = function() {
+        canvas.width = 1080;
+        canvas.height = 1920;
+
+        // fundo
+        ctx.drawImage(fundo, 0, 0, canvas.width, canvas.height);
+
+        // círculo
+        const x = 290;
+        const y = 600;
+        const radius = 250;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2);
+        ctx.clip();
+
+        ctx.drawImage(img, x, y, radius * 2, radius * 2);
+        ctx.restore();
+
+        // moldura por cima
+        moldura.onload = function() {
+          ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
+        }
+      };
+
+      img.src = URL.createObjectURL(file);
+    });
+
+    function baixar() {
+      const link = document.createElement("a");
+      link.download = "mockup.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
