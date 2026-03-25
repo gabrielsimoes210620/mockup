@@ -7,7 +7,7 @@
 
 /* Corpo */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: sans-serif;
   background: linear-gradient(135deg, #6a11cb, #2575fc);
   min-height: 100vh;
   display: flex;
@@ -15,84 +15,48 @@ body {
   align-items: center;
   justify-content: flex-start;
   color: white;
-  padding-top: 20px;
 }
 
 /* Título */
 h2 {
-  width: 85%;
+  width: 92%;
   text-align: center;
-  margin-bottom: 24px;
-  font-size: clamp(1.8rem, 5vw, 2.4rem);
-  font-weight: 600;
+  margin: 20px 0;
+  font-size: 2rem;
 }
 
-/* Input (upload) */
+/* INPUT FILE (esse é o mais chato) */
 input[type="file"] {
-  width: 85%;
-  font-size: 1.2rem;
+  width: 92%;
+  font-size: 1.3rem;
+  padding: 20px;
+  border-radius: 12px;
   background: white;
   color: #333;
-  padding: 18px; /* mais alto */
-  border-radius: 14px;
-  cursor: pointer;
-  margin-bottom: 24px;
 }
 
 /* Canvas */
 canvas {
-  width: 85%;
-  height: auto;
-  border-radius: 18px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  width: 92%;
+  margin-top: 20px;
+  border-radius: 16px;
   background: #000;
 }
 
-/* Botão */
+/* BOTÃO */
 button {
-  width: 85%;
-  margin-top: 24px;
-  padding: 22px; /* 🔥 altura maior */
+  width: 92%;
+  margin-top: 20px;
+  padding: 26px; /* 🔥 bem alto */
+  font-size: 1.4rem; /* 🔥 texto grande */
   border: none;
-  border-radius: 16px;
+  border-radius: 14px;
   background: #00c9a7;
   color: white;
-  font-size: 1.3rem; /* texto maior */
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.25s ease;
+  font-weight: bold;
 }
 
-/* Hover */
-button:hover {
-  background: #00a98b;
-  transform: scale(1.02);
-}
-
-/* Clique (efeito pressionado) */
+/* efeito clique */
 button:active {
-  transform: scale(0.98);
-}
-
-/* Ajuste para telas muito pequenas */
-@media (max-width: 360px) {
-  button {
-    padding: 20px;
-    font-size: 1.2rem;
-  }
-
-  input[type="file"] {
-    padding: 16px;
-  }
-}
-
-/* Evita ficar gigante em telas grandes */
-@media (min-width: 768px) {
-  h2,
-  input,
-  canvas,
-  button {
-    width: 420px;
-  }
+  transform: scale(0.97);
 }
