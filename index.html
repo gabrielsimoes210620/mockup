@@ -6,77 +6,70 @@
 </head>
 <body style="text-align:center; font-family:sans-serif;">
 
-  <h2>Envie sua foto</h2>
-  <input type="file" id="upload"><br><br>
+<h2>Envie sua foto</h2>
+<input type="file" id="upload"><br><br>
 
-  <canvas id="canvas"></canvas><br><br>
+<canvas id="canvas"></canvas><br><br>
 
-  <button onclick="baixar()">Baixar imagem</button>
+<button onclick="baixar()">Baixar imagem</button>
 
-  <script>
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-    const fundo = new Image();
-    fundo.src = "fundo.jpg"; // sua imagem de fundo
+const fundo = new Image();
+fundo.src = "fundo.jpg"; // fundo do canvas
+const moldura = new Image();
+moldura.src = "moldura.png"; // moldura com círculo transparente
 
-    const moldura = new Image();
-    moldura.src = "moldura.png"; // seu aro transparente
+document.getElementById("upload").addEventListener("change", function(e){
+  const file = e.target.files[0];
+  const img = new Image();
 
-    document.getElementById("upload").addEventListener("change", function(e) {
-      const file = e.target.files[0];
-      const img = new Image();
+  img.onload = function(){
+    canvas.width = 1080;
+    canvas.height = 1920;
 
-      img.onload = function() {
-        canvas.width = 1080;
-        canvas.height = 1920;
+    // 1️⃣ desenha o fundo
+    ctx.drawImage(fundo, 0, 0, canvas.width, canvas.height);
 
-        // 1️⃣ Desenha o fundo
-        ctx.drawImage(fundo, 0, 0, canvas.width, canvas.height);
+    // círculo onde a selfie vai ficar
+    const x = 290;
+    const y = 600;
+    const radius = 250;
+    const circleSize = radius*2;
 
-        // 2️⃣ Máscara circular
-        const x = 290;     // posição X do círculo
-        const y = 600;     // posição Y do círculo
-        const radius = 250; // raio do círculo
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x + radius, y + radius, radius, 0, Math.PI*2);
+    ctx.clip();
 
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2);
-        ctx.clip();
+    // 2️⃣ calcular escala proporcional (fit inside)
+    const scale = Math.max(circleSize / img.width, circleSize / img.height);
+    const newWidth = img.width * scale;
+    const newHeight = img.height * scale;
 
-        // 3️⃣ Desenha selfie proporcional dentro do círculo
-        let sx, sy, sWidth, sHeight;
+    // centralizar dentro do círculo
+    const dx = x + radius - newWidth/2;
+    const dy = y + radius - newHeight/2;
 
-        if(img.width > img.height) {
-          sWidth = img.height;
-          sHeight = img.height;
-          sx = (img.width - img.height)/2;
-          sy = 0;
-        } else {
-          sWidth = img.width;
-          sHeight = img.width;
-          sx = 0;
-          sy = (img.height - img.width)/2;
-        }
+    ctx.drawImage(img, dx, dy, newWidth, newHeight);
+    ctx.restore();
 
-        ctx.drawImage(img, sx, sy, sWidth, sHeight, x, y, radius*2, radius*2);
-        ctx.restore();
+    // 3️⃣ desenha a moldura inteira no canvas
+    ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
+  };
 
-        // 4️⃣ Desenha a moldura por cima
-        ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
-      };
+  img.src = URL.createObjectURL(file);
+});
 
-      img.src = URL.createObjectURL(file);
-    });
-
-    // função para baixar a imagem final
-    function baixar() {
-      const link = document.createElement("a");
-      link.download = "mockup.png";
-      link.href = canvas.toDataURL();
-      link.click();
-    }
-  </script>
+function baixar(){
+  const link = document.createElement("a");
+  link.download = "mockup.png";
+  link.href = canvas.toDataURL();
+  link.click();
+}
+</script>
 
 </body>
 </html>
