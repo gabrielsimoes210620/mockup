@@ -15,48 +15,61 @@ body {
   align-items: center;
   justify-content: flex-start;
   color: white;
+  padding-top: 20px;
 }
 
 /* Título */
 h2 {
   width: 92%;
   text-align: center;
-  margin: 20px 0;
+  margin-bottom: 24px;
   font-size: 2rem;
-}
-
-/* INPUT FILE (esse é o mais chato) */
-input[type="file"] {
-  width: 92%;
-  font-size: 1.3rem;
-  padding: 20px;
-  border-radius: 12px;
-  background: white;
-  color: #333;
 }
 
 /* Canvas */
 canvas {
   width: 92%;
   margin-top: 20px;
-  border-radius: 16px;
+  border-radius: 18px;
   background: #000;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
-/* BOTÃO */
+/* BOTÕES (upload + baixar) */
 button {
   width: 92%;
   margin-top: 20px;
-  padding: 26px; /* 🔥 bem alto */
+  padding: 26px; /* 🔥 grande */
   font-size: 1.4rem; /* 🔥 texto grande */
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   background: #00c9a7;
   color: white;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-/* efeito clique */
+/* Hover */
+button:hover {
+  background: #00a98b;
+}
+
+/* Clique */
 button:active {
   transform: scale(0.97);
+}
+
+/* Espaçamento extra no final */
+button:last-of-type {
+  margin-bottom: 30px;
+}
+
+/* Telas maiores (evita ficar gigante demais) */
+@media (min-width: 768px) {
+  h2,
+  canvas,
+  button {
+    width: 420px;
+  }
 }
