@@ -44,19 +44,14 @@
         ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2);
         ctx.clip();
 
-        // 3️⃣ Desenha selfie dentro do círculo sem distorcer
-        const circleSize = radius * 2;
-        const scale = Math.max(circleSize / img.width, circleSize / img.height);
-        const newWidth = img.width * scale;
-        const newHeight = img.height * scale;
-        const dx = x + radius - newWidth / 2;
-        const dy = y + radius - newHeight / 2;
-
-        ctx.drawImage(img, dx, dy, newWidth, newHeight);
+        // 3️⃣ Desenha selfie dentro do círculo
+        ctx.drawImage(img, x, y, radius * 2, radius * 2);
         ctx.restore();
 
         // 4️⃣ Desenha a moldura por cima
-        ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
+        moldura.onload = function() {
+          ctx.drawImage(moldura, 0, 0, canvas.width, canvas.height);
+        }
       };
 
       img.src = URL.createObjectURL(file);
