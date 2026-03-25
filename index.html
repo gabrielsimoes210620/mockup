@@ -8,7 +8,10 @@
 <body style="text-align:center; font-family:sans-serif;">
 
   <h2>Envie sua foto</h2>
-  <input type="file" id="upload"><br><br>
+  <input type="file" id="upload" hidden>
+<button onclick="document.getElementById('upload').click()">
+  Enviar foto
+</button>
 
   <canvas id="canvas"></canvas><br><br>
 
